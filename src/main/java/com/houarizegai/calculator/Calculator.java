@@ -221,6 +221,14 @@ public class Calculator {
 
     public double calc(double x, String input, String opt) {
         inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
+        return calculate(x, input, opt);
+    }
+
+    /**
+     * Performs a calculation without depending on the Swing interface.
+     * This method can also be used in headless environments such as CI.
+     */
+    public static double calculate(double x, String input, String opt) {
         double y = Double.parseDouble(input);
         switch (opt) {
             case "+": return x + y;
