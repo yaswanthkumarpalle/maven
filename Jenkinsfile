@@ -1,38 +1,21 @@
 pipeline {
-
     agent any
 
     stages {
-
-        stage('Checkout') {
+        stage('Build and test') {
             steps {
-                git 'https://github.com/YOUR_USERNAME/student-maven-demo.git'
+                checkout scm
+                bat 'mvn -B clean verify'
             }
         }
-
-        stage('Build') {
-            steps {
-                bat 'mvn clean package'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                bat 'mvn test'
-            }
-        }
-
     }
 
     post {
-
         success {
             echo 'BUILD SUCCESSFUL!'
         }
-
         failure {
             echo 'BUILD FAILED!'
         }
-
     }
 }
